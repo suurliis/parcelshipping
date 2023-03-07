@@ -1,0 +1,70 @@
+<h1 style="text-align: center">All Parcels</h1>
+
+<mat-form-field>
+  <mat-label>Filter by description</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="descriptionFilter"
+    (input)="findByDescription(descriptionFilter)"
+    placeholder="Search by description"
+  />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Filter by country</mat-label>
+  <mat-select
+    placeholder="Country"
+    (selectionChange)="findCountryFromDropDown($event)"
+  >
+    <mat-option *ngFor="let country of countries" [value]="country">{{
+      country
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="dataSource">
+  <mat-table [dataSource]="dataSource.items">
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+
+    <ng-container matColumnDef="sku">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sku</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.sku }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.address }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="town">
+      <mat-header-cell *matHeaderCellDef>Town</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.town }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.country }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryDate">
+      <mat-header-cell *matHeaderCellDef>Delivery Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.deliveryDate }}</mat-cell>
+    </ng-container>
+  </mat-table>
+
+  <mat-paginator
+    [length]="dataSource.meta.totalItems"
+    [pageSize]="dataSource.meta.itemsPerPage"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="pageEvent = $event; onPaginateChange($event)"
+    aria-label="Select page"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

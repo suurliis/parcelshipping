@@ -1,0 +1,77 @@
+<h1>Add new parcel</h1>
+<br />
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="SKU" formControlName="sku" />
+    <mat-hint *ngIf="addForm.get('sku')?.errors?.['required']">
+      SKU is required
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Description" formControlName="description" />
+    <mat-hint *ngIf="addForm.get('description')?.errors?.['required']">
+      Description is required
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Address" formControlName="address" />
+    <mat-hint *ngIf="addForm.get('address')?.errors?.['required']"
+      >Address is required</mat-hint
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Town" formControlName="town" />
+    <mat-hint *ngIf="addForm.get('town')?.errors?.['required']"
+      >Town is required</mat-hint
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Country" formControlName="country" />
+    <mat-hint *ngIf="addForm.get('country')?.errors?.['required']"
+      >Location is required</mat-hint
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Delivery Date"
+      formControlName="deliveryDate"
+    />
+    <mat-hint *ngIf="addForm.get('deliveryDate')?.errors?.['required']"
+      >Location is required</mat-hint
+    >
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!addForm.valid"
+    type="submit"
+  >
+    Add Parcel
+  </button>
+</form>
+<br />
+<h4 *ngIf="addForm.invalid">Form contains following errors:</h4>
+<small *ngIf="addForm.get('sku')?.hasError('skuNotUnique')"
+  >SKU number needs to be unique</small
+><br />
+<small *ngIf="addForm.get('description')?.errors?.['required']"
+  >Description is required</small
+><br />
+<small *ngIf="addForm.get('address')?.errors?.['required']"
+  >Address is required</small
+><br />
+<small *ngIf="addForm.get('town')?.errors?.['required']">Town is required</small
+><br />
+<small *ngIf="addForm.get('country')?.errors?.['required']"
+  >Country is required</small
+><br />
+<small *ngIf="addForm.get('deliveryDate')?.errors?.['required']"
+  >Delivery date is required</small
+><br />

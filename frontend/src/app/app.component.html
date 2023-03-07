@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Ship Parcels</span>
+    <span class="example-spacer"></span>
+    <mat-form-field style="margin-left: 20px" name="addNewParcelDropdown">
+      <mat-select placeholder="Choose action">
+        <mat-option (click)="navigateTo('add')">Add</mat-option>
+        <mat-option (click)="navigateTo('view')">View</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
